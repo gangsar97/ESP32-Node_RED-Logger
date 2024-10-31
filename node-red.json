@@ -95,8 +95,7 @@
             "b44068ca67893d02",
             "9153142b40625994",
             "18b09637292ae514",
-            "ef8d591e536f6f75",
-            "9b6ab8cccb3bd154"
+            "ef8d591e536f6f75"
         ],
         "x": 54,
         "y": 419,
@@ -171,8 +170,7 @@
         "y": 600,
         "wires": [
             [
-                "ef8d591e536f6f75",
-                "9b6ab8cccb3bd154"
+                "ef8d591e536f6f75"
             ]
         ]
     },
@@ -450,7 +448,7 @@
         "z": "78f04c1128a4100f",
         "g": "5d020af5e95b2f0f",
         "name": "INPUT TANGGAL",
-        "func": "\nvar tanggal = parseInt(msg.payload/1000);\nflow.set('tanggal', tanggal);\nmsg.payload = tanggal;\nreturn msg;",
+        "func": "\nvar tanggal = parseInt(msg.payload/1000) - 25200;\nflow.set('tanggal', tanggal);\nmsg.payload = tanggal;\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -975,7 +973,7 @@
         "z": "78f04c1128a4100f",
         "g": "196081f0352f3af0",
         "name": "prepare data to csv",
-        "func": "var data = msg.payload.reverse();\nvar unixtime = [];\nvar temperature = [];\nvar humidity = [];\n\n\n\nfor(var i=0;i<msg.payload.length;i++){\n    \n    unixtime[i] =  new Date(msg.payload[i].unixtime*1000).toLocaleString('en-US',{\n                    timeZone: \"Asia/Jakarta\",\n                    hour: \"2-digit\",\n                    minute: \"2-digit\",\n                    hour12: false\n                });\n                \n    temperature[i] = msg.payload[i].temperature;\n    humidity[i] = msg.payload[i].humidity;\n}\n\n\n//header CSV\n\nvar csv = \"REPORT MONITORING DHT11 \" + new Date().toLocaleDateString().replace(/\\//g, '-')+\"\\n\";\n    csv += \"time,temperature,humidity\\n\";\n\nfor(var j=msg.payload.length-1; j>=0; j--){\n    csv += unixtime[j] + \",\"+temperature[j]+\",\"+humidity[j]+\"\\n\";\n}\n\nmsg.payload = csv;\n\n//directory file dan penamaan file\nvar basePath = \"C:/Users/edutic.id/.node-red/datalog/\";\nvar fileName = \"data export \"+new Date().toLocaleDateString().replace(/\\//g, '-')+\" \"+new Date().toLocaleTimeString()+\".csv\";\nmsg.filename = basePath + fileName.replace(/ /g,'_');\nflow.set('fileLocation', basePath + fileName.replace(/ /g, '_'));\n\nreturn msg;\n",
+        "func": "var data = msg.payload.reverse();\nvar time = [];\nvar temperature = [];\nvar humidity = [];\n\nfor(var i=0;i<msg.payload.length;i++){\n    \n    time[i] =  new Date(msg.payload[i].unixtime*1000).toLocaleString('en-US',{\n                    timeZone: \"Asia/Jakarta\",\n                    hour: \"2-digit\",\n                    minute: \"2-digit\",\n                    hour12: false\n                });\n                \n    temperature[i] = msg.payload[i].temperature;\n    humidity[i] = msg.payload[i].humidity;\n}\n\n\n//header CSV\n\nvar csv = \"REPORT MONITORING DHT11 \" + new Date().toLocaleDateString().replace(/\\//g, '-')+\"\\n\";\n    csv += \"time,temperature,humidity\\n\";\n\nfor(var j=msg.payload.length-1; j>=0; j--){\n    csv += time[j] + \",\"+temperature[j]+\",\"+humidity[j]+\"\\n\";\n}\n\nmsg.payload = csv;\n\n//directory file dan penamaan file\nvar basePath = \"C:/Users/edutic.id/.node-red/datalog/\";\nvar fileName = \"data_export.csv\";\nmsg.filename = basePath + fileName;\nflow.set('fileLocation', fileName);\n\nreturn msg;\n",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -1134,23 +1132,6 @@
                 "c681dfee683963ac"
             ]
         ]
-    },
-    {
-        "id": "9b6ab8cccb3bd154",
-        "type": "debug",
-        "z": "78f04c1128a4100f",
-        "g": "5d020af5e95b2f0f",
-        "name": "debug 8",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "false",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 760,
-        "y": 540,
-        "wires": []
     },
     {
         "id": "a4bdcbc251c34ef8",
