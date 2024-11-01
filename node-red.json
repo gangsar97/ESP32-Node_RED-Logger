@@ -25,7 +25,7 @@
             "ab01cd609b5846cb"
         ],
         "x": 74,
-        "y": 1059,
+        "y": 999,
         "w": 912,
         "h": 202
     },
@@ -48,7 +48,7 @@
             "778e1dc08be9e496"
         ],
         "x": 74,
-        "y": 859,
+        "y": 759,
         "w": 832,
         "h": 182
     },
@@ -97,10 +97,29 @@
             "18b09637292ae514",
             "ef8d591e536f6f75"
         ],
-        "x": 54,
-        "y": 419,
+        "x": 74,
+        "y": 379,
         "w": 932,
         "h": 222
+    },
+    {
+        "id": "e60475206a7c8a84",
+        "type": "group",
+        "z": "78f04c1128a4100f",
+        "name": "HAPUS DATA",
+        "style": {
+            "label": true
+        },
+        "nodes": [
+            "ed449970653dd819",
+            "cd05144cfc9eba99",
+            "9bf38d8462aab94b",
+            "50403f5c993954e2"
+        ],
+        "x": 74,
+        "y": 639,
+        "w": 852,
+        "h": 82
     },
     {
         "id": "e4552ffc63cc8271",
@@ -166,8 +185,8 @@
         "g": "5d020af5e95b2f0f",
         "mydb": "c440fb64982f81a2",
         "name": "",
-        "x": 550,
-        "y": 600,
+        "x": 570,
+        "y": 560,
         "wires": [
             [
                 "ef8d591e536f6f75"
@@ -178,6 +197,7 @@
         "id": "ed449970653dd819",
         "type": "function",
         "z": "78f04c1128a4100f",
+        "g": "e60475206a7c8a84",
         "name": "DELETE DATABASE",
         "func": "msg.topic = \"DELETE FROM sensor WHERE 1\";\n\nreturn msg;",
         "outputs": 1,
@@ -186,8 +206,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 420,
-        "y": 720,
+        "x": 400,
+        "y": 680,
         "wires": [
             [
                 "cd05144cfc9eba99"
@@ -195,108 +215,17 @@
         ]
     },
     {
-        "id": "368857c47aecdf4f",
-        "type": "inject",
-        "z": "78f04c1128a4100f",
-        "name": "",
-        "props": [
-            {
-                "p": "payload"
-            },
-            {
-                "p": "topic",
-                "vt": "str"
-            }
-        ],
-        "repeat": "",
-        "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
-        "topic": "",
-        "payload": "",
-        "payloadType": "num",
-        "x": 210,
-        "y": 720,
-        "wires": [
-            [
-                "ed449970653dd819"
-            ]
-        ]
-    },
-    {
         "id": "cd05144cfc9eba99",
         "type": "mysql",
         "z": "78f04c1128a4100f",
+        "g": "e60475206a7c8a84",
         "mydb": "c440fb64982f81a2",
         "name": "",
-        "x": 610,
-        "y": 720,
+        "x": 590,
+        "y": 680,
         "wires": [
             [
                 "9bf38d8462aab94b"
-            ]
-        ]
-    },
-    {
-        "id": "fd06265f153b540b",
-        "type": "function",
-        "z": "78f04c1128a4100f",
-        "name": "UPDATE database",
-        "func": "msg.topic = \"UPDATE monitoring SET temperature = 25.8 WHERE id=1080\";\n\nreturn msg;",
-        "outputs": 1,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 410,
-        "y": 800,
-        "wires": [
-            [
-                "20a607fd74aa5b24"
-            ]
-        ]
-    },
-    {
-        "id": "fd854ebd7adbbba7",
-        "type": "inject",
-        "z": "78f04c1128a4100f",
-        "name": "",
-        "props": [
-            {
-                "p": "payload"
-            },
-            {
-                "p": "topic",
-                "vt": "str"
-            }
-        ],
-        "repeat": "",
-        "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
-        "topic": "",
-        "payload": "",
-        "payloadType": "num",
-        "x": 210,
-        "y": 800,
-        "wires": [
-            [
-                "fd06265f153b540b"
-            ]
-        ]
-    },
-    {
-        "id": "20a607fd74aa5b24",
-        "type": "mysql",
-        "z": "78f04c1128a4100f",
-        "mydb": "c440fb64982f81a2",
-        "name": "",
-        "x": 610,
-        "y": 800,
-        "wires": [
-            [
-                "afdbbd54104ab4d1"
             ]
         ]
     },
@@ -354,14 +283,15 @@
         ],
         "outputs": 0,
         "cts": false,
-        "x": 910,
-        "y": 600,
+        "x": 930,
+        "y": 560,
         "wires": []
     },
     {
         "id": "9bf38d8462aab94b",
         "type": "debug",
         "z": "78f04c1128a4100f",
+        "g": "e60475206a7c8a84",
         "name": "debug 3",
         "active": true,
         "tosidebar": true,
@@ -370,24 +300,8 @@
         "complete": "false",
         "statusVal": "",
         "statusType": "auto",
-        "x": 840,
-        "y": 720,
-        "wires": []
-    },
-    {
-        "id": "afdbbd54104ab4d1",
-        "type": "debug",
-        "z": "78f04c1128a4100f",
-        "name": "debug 4",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "false",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 840,
-        "y": 800,
+        "x": 820,
+        "y": 680,
         "wires": []
     },
     {
@@ -405,8 +319,8 @@
         "topic": "topic",
         "topicType": "msg",
         "className": "",
-        "x": 140,
-        "y": 460,
+        "x": 160,
+        "y": 420,
         "wires": [
             [
                 "e9f81cf86ae13e54"
@@ -434,8 +348,8 @@
         "payloadType": "str",
         "topic": "topic",
         "topicType": "msg",
-        "x": 140,
-        "y": 600,
+        "x": 160,
+        "y": 560,
         "wires": [
             [
                 "b44068ca67893d02"
@@ -455,8 +369,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 330,
-        "y": 460,
+        "x": 350,
+        "y": 420,
         "wires": [
             []
         ]
@@ -474,8 +388,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 360,
-        "y": 500,
+        "x": 380,
+        "y": 460,
         "wires": [
             []
         ]
@@ -493,8 +407,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 360,
-        "y": 540,
+        "x": 380,
+        "y": 500,
         "wires": [
             []
         ]
@@ -512,8 +426,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 340,
-        "y": 600,
+        "x": 360,
+        "y": 560,
         "wires": [
             [
                 "81c40225139934ae"
@@ -713,8 +627,8 @@
         "sendOnBlur": true,
         "className": "",
         "topicType": "msg",
-        "x": 130,
-        "y": 500,
+        "x": 150,
+        "y": 460,
         "wires": [
             [
                 "df41d33c64d8a964"
@@ -740,8 +654,8 @@
         "sendOnBlur": true,
         "className": "",
         "topicType": "msg",
-        "x": 140,
-        "y": 540,
+        "x": 160,
+        "y": 500,
         "wires": [
             [
                 "73acbbe2699ca38a"
@@ -761,8 +675,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 730,
-        "y": 600,
+        "x": 750,
+        "y": 560,
         "wires": [
             [
                 "6813becc9e0d8ec1"
@@ -783,7 +697,7 @@
         "encoding": "none",
         "allProps": false,
         "x": 580,
-        "y": 1100,
+        "y": 1040,
         "wires": [
             [
                 "463f5727536a49c3"
@@ -804,7 +718,7 @@
         "finalize": "",
         "libs": [],
         "x": 380,
-        "y": 1140,
+        "y": 1080,
         "wires": [
             [
                 "52d3a1adbb76270f",
@@ -821,7 +735,7 @@
         "statusCode": "",
         "headers": {},
         "x": 900,
-        "y": 1100,
+        "y": 1040,
         "wires": []
     },
     {
@@ -859,7 +773,7 @@
         "to": "",
         "reg": false,
         "x": 750,
-        "y": 1100,
+        "y": 1040,
         "wires": [
             [
                 "24240f9d09a49a11"
@@ -877,7 +791,7 @@
         "upload": false,
         "swaggerDoc": "",
         "x": 190,
-        "y": 1140,
+        "y": 1080,
         "wires": [
             [
                 "311b246cb08daf2e"
@@ -897,7 +811,7 @@
         "overwriteFile": "delete",
         "encoding": "none",
         "x": 750,
-        "y": 1180,
+        "y": 1120,
         "wires": [
             []
         ]
@@ -921,7 +835,7 @@
         "allowrate": false,
         "outputs": 1,
         "x": 570,
-        "y": 1220,
+        "y": 1160,
         "wires": [
             [
                 "1d53d28b25def0f1"
@@ -942,7 +856,7 @@
         "finalize": "",
         "libs": [],
         "x": 250,
-        "y": 1000,
+        "y": 900,
         "wires": [
             [
                 "778e1dc08be9e496"
@@ -962,7 +876,7 @@
         "overwriteFile": "true",
         "encoding": "utf8",
         "x": 820,
-        "y": 1000,
+        "y": 900,
         "wires": [
             []
         ]
@@ -981,7 +895,7 @@
         "finalize": "",
         "libs": [],
         "x": 610,
-        "y": 1000,
+        "y": 900,
         "wires": [
             [
                 "6754fdfc83ccf7d5"
@@ -1010,7 +924,7 @@
         "topic": "topic",
         "topicType": "msg",
         "x": 180,
-        "y": 900,
+        "y": 800,
         "wires": [
             [
                 "78316ccb1ea790cb",
@@ -1037,7 +951,7 @@
         "allowrate": false,
         "outputs": 1,
         "x": 390,
-        "y": 900,
+        "y": 800,
         "wires": [
             [
                 "7a86e46973eda80c"
@@ -1052,8 +966,8 @@
         "group": "7e4ca4b84762c487",
         "name": "link download",
         "order": 6,
-        "width": 0,
-        "height": 0,
+        "width": 9,
+        "height": 1,
         "format": "<script>\n  (function(scope) {\n    scope.$watch('msg.payload', function(data) {\n        if (data == \"file\") {\n          window.open(\"http://localhost:1880/file\");\n        }\n    });\n})(scope);\n</script>",
         "storeOutMessages": false,
         "fwdInMessages": true,
@@ -1061,7 +975,7 @@
         "templateScope": "local",
         "className": "",
         "x": 780,
-        "y": 900,
+        "y": 800,
         "wires": [
             []
         ]
@@ -1085,7 +999,7 @@
         "topic": "topic",
         "outputs": 1,
         "x": 600,
-        "y": 900,
+        "y": 800,
         "wires": [
             [
                 "b1cd8de2cd59f0d3"
@@ -1100,7 +1014,7 @@
         "mydb": "c440fb64982f81a2",
         "name": "",
         "x": 430,
-        "y": 1000,
+        "y": 900,
         "wires": [
             [
                 "270b96a238394039"
@@ -1134,14 +1048,33 @@
         ]
     },
     {
-        "id": "a4bdcbc251c34ef8",
-        "type": "ui_spacer",
+        "id": "50403f5c993954e2",
+        "type": "ui_button",
         "z": "78f04c1128a4100f",
-        "name": "spacer",
+        "g": "e60475206a7c8a84",
+        "name": "",
         "group": "7e4ca4b84762c487",
         "order": 7,
-        "width": 12,
-        "height": 1
+        "width": 3,
+        "height": 1,
+        "passthru": false,
+        "label": "DELETE DATA",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "red",
+        "className": "",
+        "icon": "",
+        "payload": "",
+        "payloadType": "str",
+        "topic": "topic",
+        "topicType": "msg",
+        "x": 180,
+        "y": 680,
+        "wires": [
+            [
+                "ed449970653dd819"
+            ]
+        ]
     },
     {
         "id": "d02df75253f5c541",
