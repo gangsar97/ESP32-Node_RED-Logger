@@ -14,7 +14,8 @@ const char* password = "pass";
 
 //Setup MQTT
 const char* mqtt_server = "broker.emqx.io";
-const char* PUBLISH_JSON = "edutic/dht11/json";
+const char* PUBLISH_JSON = "edutic/dht11";
+int intervalPengiriman = 5; // dalam Detik
 
 float temperature;
 float humidity;
@@ -46,25 +47,6 @@ void setup_wifi() {
   Serial.println(WiFi.localIP());
 }
 
-void callback(char* topic, byte* payload, unsigned int length) {
-  Serial.print("Pesan Masuk dari topic [");
-  Serial.print(topic);
-  Serial.print("] :");
-  for (int i = 0; i < length; i++) {
-    Serial.print((char)payload[i]);
-  }
-  Serial.println();
-
-  if ((char)payload[0] == '1') {
-    digitalWrite(LED, HIGH);
-    Serial.println("LED ON");
-  } else {
-    digitalWrite(LED, LOW);
-    Serial.println("LED OFF");
-  }
-
-}
-
 void reconnect() {
   while (!mqtt.connected()) {
     Serial.print("Attempting MQTT connection...");
@@ -74,8 +56,6 @@ void reconnect() {
 
     if (mqtt.connect(clientId.c_str())) {
       Serial.println("connected!");
-      mqtt.subscribe(SUBSCRIBE_LED);
-      Serial.println("Subscribe ke topic: " + String(SUBSCRIBE_LED));
     } else {
       Serial.print("Failed, rc=");
       Serial.print(mqtt.state());
@@ -105,11 +85,10 @@ void setup() {
   setup_wifi();
   dht.begin();
   mqtt.setServer(mqtt_server, 1883);
-  mqtt.setCallback(callback);
 }
 
 void loop() {
-  if (millis() - prevMillis >= 60000) {
+  if (millis() - prevMillis >= intervalPengiriman*1000) {
     if (!mqtt.connected()) {
       reconnect();
     }
