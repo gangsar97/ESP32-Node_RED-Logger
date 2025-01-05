@@ -4,25 +4,24 @@
 #include <ArduinoJson.h>
 #include <DHT.h>
 
+//setup pin DHT
+#define DHTPIN 14
+#define DHTTYPE DHT11
+
+//Setup WiFi
 const char* ssid = "SSID";
 const char* password = "pass";
-const char* mqtt_server = "test.mosquitto.org";
+
+//Setup MQTT
+const char* mqtt_server = "broker.emqx.io";
+const char* PUBLISH_JSON = "edutic/dht11/json";
+
 float temperature;
 float humidity;
 char bufferTemp[5];
 char bufferHum[5];
 uint32_t prevMillis;
 
-
-const char* SUBSCRIBE_LED = "edutic/dht11/led";
-const char* PUBLISH_TEMP = "edutic/dht11/temperature";
-const char* PUBLISH_HUMID = "edutic/dht11/humidity";
-const char* PUBLISH_JSON = "edutic/dht11/json";
-
-
-#define LED 2
-#define DHTPIN 27
-#define DHTTYPE DHT11
 
 WiFiClient espClient;
 PubSubClient mqtt(espClient);
@@ -86,14 +85,6 @@ void reconnect() {
   }
 }
 
-void publish_data() {
-  sprintf(bufferTemp, "%.1f", temperature);
-  mqtt.publish(PUBLISH_TEMP, bufferTemp);
-
-  sprintf(bufferHum, "%.1f", humidity);
-  mqtt.publish(PUBLISH_HUMID, bufferHum);
-}
-
 void publish_json() {
 
   char json[256];
@@ -110,7 +101,6 @@ void publish_json() {
 }
 
 void setup() {
-  pinMode(LED, OUTPUT);
   Serial.begin(115200);
   setup_wifi();
   dht.begin();
@@ -127,10 +117,8 @@ void loop() {
 
     temperature = dht.readTemperature();
     humidity = dht.readHumidity();
-
-
+    
     publish_json();
-    //publish_data();
     prevMillis = millis();
   }
 }
