@@ -2,38 +2,16 @@
     {
         "id": "78f04c1128a4100f",
         "type": "tab",
-        "label": "ESP32 MQTT",
+        "label": "ESP32 Temperature Logger",
         "disabled": false,
         "info": "",
         "env": []
     },
     {
-        "id": "a15340aee8fccd3e",
-        "type": "group",
-        "z": "78f04c1128a4100f",
-        "name": "DOWNLOAD REQUEST LINK (KETIKA LINK DOWNLOAD DI KLIK)",
-        "style": {
-            "label": true
-        },
-        "nodes": [
-            "52d3a1adbb76270f",
-            "311b246cb08daf2e",
-            "24240f9d09a49a11",
-            "463f5727536a49c3",
-            "0dc8805fb4afbb91",
-            "1d53d28b25def0f1",
-            "ab01cd609b5846cb"
-        ],
-        "x": 74,
-        "y": 999,
-        "w": 912,
-        "h": 202
-    },
-    {
         "id": "196081f0352f3af0",
         "type": "group",
         "z": "78f04c1128a4100f",
-        "name": "WRITE FILE TO DIRECTORY",
+        "name": "DOWNLOAD FILE TO CSV",
         "style": {
             "label": true
         },
@@ -42,14 +20,13 @@
             "6754fdfc83ccf7d5",
             "270b96a238394039",
             "db3b739ff69854bd",
-            "78316ccb1ea790cb",
-            "b1cd8de2cd59f0d3",
-            "7a86e46973eda80c",
-            "778e1dc08be9e496"
+            "778e1dc08be9e496",
+            "807cb2c79a23c984",
+            "e8f4f3e2c9a94c78"
         ],
         "x": 74,
-        "y": 759,
-        "w": 832,
+        "y": 839,
+        "w": 952,
         "h": 182
     },
     {
@@ -62,19 +39,13 @@
         },
         "nodes": [
             "e4490a2d78dd322c",
-            "e4552ffc63cc8271",
             "c681dfee683963ac",
-            "d0fe0f29b216778b",
-            "6594cc0b71735e9d",
-            "30397002da674aae",
-            "4b0bcdb747c158f2",
-            "043e0b845b7df3ad",
             "bc263a9d365765fb"
         ],
-        "x": 74,
-        "y": 59,
-        "w": 852,
-        "h": 282
+        "x": 334,
+        "y": 19,
+        "w": 572,
+        "h": 82
     },
     {
         "id": "5d020af5e95b2f0f",
@@ -95,10 +66,11 @@
             "b44068ca67893d02",
             "9153142b40625994",
             "18b09637292ae514",
-            "ef8d591e536f6f75"
+            "ef8d591e536f6f75",
+            "a4e69ed96d6da2d6"
         ],
         "x": 74,
-        "y": 379,
+        "y": 439,
         "w": 932,
         "h": 222
     },
@@ -117,26 +89,45 @@
             "50403f5c993954e2"
         ],
         "x": 74,
-        "y": 639,
+        "y": 699,
         "w": 852,
         "h": 82
+    },
+    {
+        "id": "4ba10ca2f909b10b",
+        "type": "group",
+        "z": "78f04c1128a4100f",
+        "name": "Tampilkan Data ke Dashboard",
+        "style": {
+            "label": true
+        },
+        "nodes": [
+            "d0fe0f29b216778b",
+            "6594cc0b71735e9d",
+            "30397002da674aae",
+            "4b0bcdb747c158f2",
+            "043e0b845b7df3ad"
+        ],
+        "x": 334,
+        "y": 139,
+        "w": 572,
+        "h": 222
     },
     {
         "id": "e4552ffc63cc8271",
         "type": "mqtt in",
         "z": "78f04c1128a4100f",
-        "g": "40836f6546617f82",
         "name": "SUBSCRIBE",
-        "topic": "edutic/dht11/json",
+        "topic": "edutic/dht",
         "qos": "0",
         "datatype": "auto-detect",
-        "broker": "d02df75253f5c541",
+        "broker": "",
         "nl": false,
         "rap": true,
         "rh": 0,
         "inputs": 0,
-        "x": 170,
-        "y": 100,
+        "x": 150,
+        "y": 140,
         "wires": [
             [
                 "e4490a2d78dd322c",
@@ -157,8 +148,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 440,
-        "y": 100,
+        "x": 460,
+        "y": 60,
         "wires": [
             [
                 "bc263a9d365765fb"
@@ -170,10 +161,10 @@
         "type": "mysql",
         "z": "78f04c1128a4100f",
         "g": "40836f6546617f82",
-        "mydb": "c440fb64982f81a2",
+        "mydb": "",
         "name": "",
-        "x": 810,
-        "y": 100,
+        "x": 830,
+        "y": 60,
         "wires": [
             []
         ]
@@ -183,10 +174,10 @@
         "type": "mysql",
         "z": "78f04c1128a4100f",
         "g": "5d020af5e95b2f0f",
-        "mydb": "c440fb64982f81a2",
+        "mydb": "",
         "name": "",
         "x": 570,
-        "y": 560,
+        "y": 620,
         "wires": [
             [
                 "ef8d591e536f6f75"
@@ -199,7 +190,7 @@
         "z": "78f04c1128a4100f",
         "g": "e60475206a7c8a84",
         "name": "DELETE DATABASE",
-        "func": "msg.topic = \"DELETE FROM sensor WHERE 1\";\n\nreturn msg;",
+        "func": "msg.topic = \"DELETE FROM sensor\";\n\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -207,7 +198,7 @@
         "finalize": "",
         "libs": [],
         "x": 400,
-        "y": 680,
+        "y": 740,
         "wires": [
             [
                 "cd05144cfc9eba99"
@@ -219,10 +210,10 @@
         "type": "mysql",
         "z": "78f04c1128a4100f",
         "g": "e60475206a7c8a84",
-        "mydb": "c440fb64982f81a2",
+        "mydb": "",
         "name": "",
-        "x": 590,
-        "y": 680,
+        "x": 630,
+        "y": 740,
         "wires": [
             [
                 "9bf38d8462aab94b"
@@ -284,7 +275,7 @@
         "outputs": 0,
         "cts": false,
         "x": 930,
-        "y": 560,
+        "y": 620,
         "wires": []
     },
     {
@@ -301,7 +292,7 @@
         "statusVal": "",
         "statusType": "auto",
         "x": 820,
-        "y": 680,
+        "y": 740,
         "wires": []
     },
     {
@@ -320,7 +311,7 @@
         "topicType": "msg",
         "className": "",
         "x": 160,
-        "y": 420,
+        "y": 480,
         "wires": [
             [
                 "e9f81cf86ae13e54"
@@ -349,7 +340,7 @@
         "topic": "topic",
         "topicType": "msg",
         "x": 160,
-        "y": 560,
+        "y": 620,
         "wires": [
             [
                 "b44068ca67893d02"
@@ -362,7 +353,7 @@
         "z": "78f04c1128a4100f",
         "g": "5d020af5e95b2f0f",
         "name": "INPUT TANGGAL",
-        "func": "\nvar tanggal = parseInt(msg.payload/1000) - 25200;\nflow.set('tanggal', tanggal);\nmsg.payload = tanggal;\nreturn msg;",
+        "func": "var waktu_WIB = 7 * 60 * 60;\nvar tanggal = parseInt(msg.payload/1000) - waktu_WIB;\n\nflow.set('tanggal', tanggal);\n\nmsg.payload = tanggal;\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -370,7 +361,7 @@
         "finalize": "",
         "libs": [],
         "x": 350,
-        "y": 420,
+        "y": 480,
         "wires": [
             []
         ]
@@ -389,7 +380,7 @@
         "finalize": "",
         "libs": [],
         "x": 380,
-        "y": 460,
+        "y": 520,
         "wires": [
             []
         ]
@@ -408,7 +399,7 @@
         "finalize": "",
         "libs": [],
         "x": 380,
-        "y": 500,
+        "y": 560,
         "wires": [
             []
         ]
@@ -427,10 +418,11 @@
         "finalize": "",
         "libs": [],
         "x": 360,
-        "y": 560,
+        "y": 620,
         "wires": [
             [
-                "81c40225139934ae"
+                "81c40225139934ae",
+                "a4e69ed96d6da2d6"
             ]
         ]
     },
@@ -438,7 +430,7 @@
         "id": "d0fe0f29b216778b",
         "type": "function",
         "z": "78f04c1128a4100f",
-        "g": "40836f6546617f82",
+        "g": "4ba10ca2f909b10b",
         "name": "Parsing data",
         "func": "var temperature = msg.payload.temperature;\nvar humidity = msg.payload.humidity;\n\n\nreturn [\n    {payload : temperature},\n    {payload : humidity}\n];",
         "outputs": 2,
@@ -447,7 +439,7 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 450,
+        "x": 430,
         "y": 220,
         "wires": [
             [
@@ -464,7 +456,7 @@
         "id": "6594cc0b71735e9d",
         "type": "ui_chart",
         "z": "78f04c1128a4100f",
-        "g": "40836f6546617f82",
+        "g": "4ba10ca2f909b10b",
         "name": "",
         "group": "d6ce21bc59035408",
         "order": 1,
@@ -499,8 +491,8 @@
         "outputs": 1,
         "useDifferentColor": false,
         "className": "",
-        "x": 810,
-        "y": 260,
+        "x": 790,
+        "y": 280,
         "wires": [
             []
         ]
@@ -509,7 +501,7 @@
         "id": "30397002da674aae",
         "type": "ui_chart",
         "z": "78f04c1128a4100f",
-        "g": "40836f6546617f82",
+        "g": "4ba10ca2f909b10b",
         "name": "",
         "group": "d6ce21bc59035408",
         "order": 2,
@@ -544,8 +536,8 @@
         "outputs": 1,
         "useDifferentColor": false,
         "className": "",
-        "x": 800,
-        "y": 300,
+        "x": 780,
+        "y": 320,
         "wires": [
             []
         ]
@@ -554,7 +546,7 @@
         "id": "4b0bcdb747c158f2",
         "type": "ui_gauge",
         "z": "78f04c1128a4100f",
-        "g": "40836f6546617f82",
+        "g": "4ba10ca2f909b10b",
         "name": "",
         "group": "3250b3d94e1fa8e6",
         "order": 2,
@@ -565,7 +557,7 @@
         "label": "",
         "format": "{{value}}",
         "min": "30",
-        "max": "70",
+        "max": "85",
         "colors": [
             "#00b500",
             "#e6e600",
@@ -575,15 +567,15 @@
         "seg2": "",
         "diff": false,
         "className": "",
-        "x": 820,
-        "y": 200,
+        "x": 800,
+        "y": 220,
         "wires": []
     },
     {
         "id": "043e0b845b7df3ad",
         "type": "ui_gauge",
         "z": "78f04c1128a4100f",
-        "g": "40836f6546617f82",
+        "g": "4ba10ca2f909b10b",
         "name": "",
         "group": "3250b3d94e1fa8e6",
         "order": 1,
@@ -604,8 +596,8 @@
         "seg2": "",
         "diff": false,
         "className": "",
-        "x": 830,
-        "y": 160,
+        "x": 810,
+        "y": 180,
         "wires": []
     },
     {
@@ -628,7 +620,7 @@
         "className": "",
         "topicType": "msg",
         "x": 150,
-        "y": 460,
+        "y": 520,
         "wires": [
             [
                 "df41d33c64d8a964"
@@ -655,7 +647,7 @@
         "className": "",
         "topicType": "msg",
         "x": 160,
-        "y": 500,
+        "y": 560,
         "wires": [
             [
                 "73acbbe2699ca38a"
@@ -676,169 +668,10 @@
         "finalize": "",
         "libs": [],
         "x": 750,
-        "y": 560,
+        "y": 620,
         "wires": [
             [
                 "6813becc9e0d8ec1"
-            ]
-        ]
-    },
-    {
-        "id": "52d3a1adbb76270f",
-        "type": "file in",
-        "z": "78f04c1128a4100f",
-        "g": "a15340aee8fccd3e",
-        "name": "",
-        "filename": "filename",
-        "filenameType": "msg",
-        "format": "",
-        "chunk": false,
-        "sendError": false,
-        "encoding": "none",
-        "allProps": false,
-        "x": 580,
-        "y": 1040,
-        "wires": [
-            [
-                "463f5727536a49c3"
-            ]
-        ]
-    },
-    {
-        "id": "311b246cb08daf2e",
-        "type": "function",
-        "z": "78f04c1128a4100f",
-        "g": "a15340aee8fccd3e",
-        "name": "Set File name",
-        "func": "var fileLocation = flow.get('fileLocation');\nmsg.payload = fileLocation;\nmsg.filename = fileLocation;\nreturn msg;\n\n\n",
-        "outputs": 1,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 380,
-        "y": 1080,
-        "wires": [
-            [
-                "52d3a1adbb76270f",
-                "ab01cd609b5846cb"
-            ]
-        ]
-    },
-    {
-        "id": "24240f9d09a49a11",
-        "type": "http response",
-        "z": "78f04c1128a4100f",
-        "g": "a15340aee8fccd3e",
-        "name": "Respons",
-        "statusCode": "",
-        "headers": {},
-        "x": 900,
-        "y": 1040,
-        "wires": []
-    },
-    {
-        "id": "463f5727536a49c3",
-        "type": "change",
-        "z": "78f04c1128a4100f",
-        "g": "a15340aee8fccd3e",
-        "name": "Set Headers",
-        "rules": [
-            {
-                "t": "set",
-                "p": "headers",
-                "pt": "msg",
-                "to": "{}",
-                "tot": "json"
-            },
-            {
-                "t": "set",
-                "p": "headers.content-type",
-                "pt": "msg",
-                "to": "text/csv",
-                "tot": "str"
-            },
-            {
-                "t": "set",
-                "p": "headers.Content-Disposition",
-                "pt": "msg",
-                "to": "attachment; filename=\"REPORT DHT11.csv\"",
-                "tot": "str"
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 750,
-        "y": 1040,
-        "wires": [
-            [
-                "24240f9d09a49a11"
-            ]
-        ]
-    },
-    {
-        "id": "0dc8805fb4afbb91",
-        "type": "http in",
-        "z": "78f04c1128a4100f",
-        "g": "a15340aee8fccd3e",
-        "name": "Request download",
-        "url": "/file",
-        "method": "get",
-        "upload": false,
-        "swaggerDoc": "",
-        "x": 190,
-        "y": 1080,
-        "wires": [
-            [
-                "311b246cb08daf2e"
-            ]
-        ]
-    },
-    {
-        "id": "1d53d28b25def0f1",
-        "type": "file",
-        "z": "78f04c1128a4100f",
-        "g": "a15340aee8fccd3e",
-        "name": "",
-        "filename": "filename",
-        "filenameType": "msg",
-        "appendNewline": true,
-        "createDir": false,
-        "overwriteFile": "delete",
-        "encoding": "none",
-        "x": 750,
-        "y": 1120,
-        "wires": [
-            []
-        ]
-    },
-    {
-        "id": "ab01cd609b5846cb",
-        "type": "delay",
-        "z": "78f04c1128a4100f",
-        "g": "a15340aee8fccd3e",
-        "name": "",
-        "pauseType": "delay",
-        "timeout": "300",
-        "timeoutUnits": "milliseconds",
-        "rate": "1",
-        "nbRateUnits": "1",
-        "rateUnits": "second",
-        "randomFirst": "1",
-        "randomLast": "5",
-        "randomUnits": "seconds",
-        "drop": false,
-        "allowrate": false,
-        "outputs": 1,
-        "x": 570,
-        "y": 1160,
-        "wires": [
-            [
-                "1d53d28b25def0f1"
             ]
         ]
     },
@@ -855,8 +688,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 250,
-        "y": 900,
+        "x": 390,
+        "y": 880,
         "wires": [
             [
                 "778e1dc08be9e496"
@@ -875,10 +708,12 @@
         "createDir": true,
         "overwriteFile": "true",
         "encoding": "utf8",
-        "x": 820,
-        "y": 900,
+        "x": 520,
+        "y": 980,
         "wires": [
-            []
+            [
+                "e8f4f3e2c9a94c78"
+            ]
         ]
     },
     {
@@ -887,15 +722,15 @@
         "z": "78f04c1128a4100f",
         "g": "196081f0352f3af0",
         "name": "prepare data to csv",
-        "func": "var data = msg.payload.reverse();\nvar time = [];\nvar temperature = [];\nvar humidity = [];\n\nfor(var i=0;i<msg.payload.length;i++){\n    \n    time[i] =  new Date(msg.payload[i].unixtime*1000).toLocaleString('en-US',{\n                    timeZone: \"Asia/Jakarta\",\n                    hour: \"2-digit\",\n                    minute: \"2-digit\",\n                    hour12: false\n                });\n                \n    temperature[i] = msg.payload[i].temperature;\n    humidity[i] = msg.payload[i].humidity;\n}\n\n\n//header CSV\n\nvar csv = \"REPORT MONITORING DHT11 \" + new Date().toLocaleDateString().replace(/\\//g, '-')+\"\\n\";\n    csv += \"time,temperature,humidity\\n\";\n\nfor(var j=msg.payload.length-1; j>=0; j--){\n    csv += time[j] + \",\"+temperature[j]+\",\"+humidity[j]+\"\\n\";\n}\n\nmsg.payload = csv;\n\n//directory file dan penamaan file\nvar basePath = \"C:/Users/edutic.id/.node-red/datalog/\";\nvar fileName = \"data_export.csv\";\nmsg.filename = basePath + fileName;\nflow.set('fileLocation', basePath + fileName);\n\nreturn msg;\n",
+        "func": "var data = msg.payload.reverse();\nvar time = [];\nvar temperature = [];\nvar humidity = [];\n\nfor(var i=0;i<msg.payload.length;i++){\n    \n    time[i] =  new Date(msg.payload[i].unixtime*1000).toLocaleString('en-US',{\n                    timeZone: \"Asia/Jakarta\",\n                    hour: \"2-digit\",\n                    minute: \"2-digit\",\n                    hour12: false\n                });\n                \n    temperature[i] = msg.payload[i].temperature;\n    humidity[i] = msg.payload[i].humidity;\n}\n\n\n//header CSV\n\nvar csv = \"REPORT MONITORING DHT11 \" + new Date().toLocaleDateString().replace(/\\//g, '-')+\"\\n\";\n    csv += \"time,temperature,humidity\\n\";\n\nfor(var j=msg.payload.length-1; j>=0; j--){\n    csv += time[j] + \",\"+temperature[j]+\",\"+humidity[j]+\"\\n\";\n}\n\nmsg.payload = csv;\n\n//directory file dan penamaan file\nvar basePath = \"C:/Users/edutic.id/.node-red/datalog/\";\nvar fileName = \"data_export\"+ new Date().toLocaleString().replace(/\\//g, '-') +\".csv\";\nmsg.filename = basePath + fileName;\nflow.set('fileLocation', basePath + fileName);\n\nreturn msg;\n",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 610,
-        "y": 900,
+        "x": 310,
+        "y": 980,
         "wires": [
             [
                 "6754fdfc83ccf7d5"
@@ -924,85 +759,10 @@
         "topic": "topic",
         "topicType": "msg",
         "x": 180,
-        "y": 800,
+        "y": 880,
         "wires": [
             [
-                "78316ccb1ea790cb",
                 "e59de277e2f488a3"
-            ]
-        ]
-    },
-    {
-        "id": "78316ccb1ea790cb",
-        "type": "delay",
-        "z": "78f04c1128a4100f",
-        "g": "196081f0352f3af0",
-        "name": "",
-        "pauseType": "delay",
-        "timeout": "100",
-        "timeoutUnits": "milliseconds",
-        "rate": "1",
-        "nbRateUnits": "1",
-        "rateUnits": "second",
-        "randomFirst": "1",
-        "randomLast": "5",
-        "randomUnits": "seconds",
-        "drop": false,
-        "allowrate": false,
-        "outputs": 1,
-        "x": 390,
-        "y": 800,
-        "wires": [
-            [
-                "7a86e46973eda80c"
-            ]
-        ]
-    },
-    {
-        "id": "b1cd8de2cd59f0d3",
-        "type": "ui_template",
-        "z": "78f04c1128a4100f",
-        "g": "196081f0352f3af0",
-        "group": "7e4ca4b84762c487",
-        "name": "link download",
-        "order": 6,
-        "width": 9,
-        "height": 1,
-        "format": "<script>\n  (function(scope) {\n    scope.$watch('msg.payload', function(data) {\n        if (data == \"file\") {\n          window.open(\"http://localhost:1880/file\");\n        }\n    });\n})(scope);\n</script>",
-        "storeOutMessages": false,
-        "fwdInMessages": true,
-        "resendOnRefresh": false,
-        "templateScope": "local",
-        "className": "",
-        "x": 780,
-        "y": 800,
-        "wires": [
-            []
-        ]
-    },
-    {
-        "id": "7a86e46973eda80c",
-        "type": "trigger",
-        "z": "78f04c1128a4100f",
-        "g": "196081f0352f3af0",
-        "name": "reset msg",
-        "op1": "",
-        "op2": "empty",
-        "op1type": "pay",
-        "op2type": "str",
-        "duration": "250",
-        "extend": false,
-        "overrideDelay": false,
-        "units": "ms",
-        "reset": "",
-        "bytopic": "all",
-        "topic": "topic",
-        "outputs": 1,
-        "x": 600,
-        "y": 800,
-        "wires": [
-            [
-                "b1cd8de2cd59f0d3"
             ]
         ]
     },
@@ -1011,10 +771,10 @@
         "type": "mysql",
         "z": "78f04c1128a4100f",
         "g": "196081f0352f3af0",
-        "mydb": "c440fb64982f81a2",
+        "mydb": "",
         "name": "",
-        "x": 430,
-        "y": 900,
+        "x": 570,
+        "y": 880,
         "wires": [
             [
                 "270b96a238394039"
@@ -1039,8 +799,8 @@
         "drop": true,
         "allowrate": false,
         "outputs": 1,
-        "x": 650,
-        "y": 100,
+        "x": 670,
+        "y": 60,
         "wires": [
             [
                 "c681dfee683963ac"
@@ -1069,7 +829,7 @@
         "topic": "topic",
         "topicType": "msg",
         "x": 180,
-        "y": 680,
+        "y": 740,
         "wires": [
             [
                 "ed449970653dd819"
@@ -1077,45 +837,93 @@
         ]
     },
     {
-        "id": "d02df75253f5c541",
-        "type": "mqtt-broker",
-        "name": "",
-        "broker": "test.mosquitto.org",
-        "port": "1883",
-        "clientid": "",
-        "autoConnect": true,
-        "usetls": false,
-        "protocolVersion": "4",
-        "keepalive": "60",
-        "cleansession": true,
-        "autoUnsubscribe": true,
-        "birthTopic": "",
-        "birthQos": "0",
-        "birthRetain": "false",
-        "birthPayload": "",
-        "birthMsg": {},
-        "closeTopic": "",
-        "closeQos": "0",
-        "closeRetain": "false",
-        "closePayload": "",
-        "closeMsg": {},
-        "willTopic": "",
-        "willQos": "0",
-        "willRetain": "false",
-        "willPayload": "",
-        "willMsg": {},
-        "userProps": "",
-        "sessionExpiry": ""
+        "id": "a4e69ed96d6da2d6",
+        "type": "debug",
+        "z": "78f04c1128a4100f",
+        "g": "5d020af5e95b2f0f",
+        "name": "debug 6",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 590,
+        "y": 540,
+        "wires": []
     },
     {
-        "id": "c440fb64982f81a2",
-        "type": "MySQLdatabase",
+        "id": "807cb2c79a23c984",
+        "type": "ui_toast",
+        "z": "78f04c1128a4100f",
+        "g": "196081f0352f3af0",
+        "position": "top right",
+        "displayTime": "",
+        "highlight": "",
+        "sendall": true,
+        "outputs": 0,
+        "ok": "OK",
+        "cancel": "",
+        "raw": false,
+        "className": "",
+        "topic": "",
         "name": "",
-        "host": "127.0.0.1",
-        "port": "3306",
-        "db": "edutic",
-        "tz": "",
-        "charset": "UTF8"
+        "x": 910,
+        "y": 980,
+        "wires": []
+    },
+    {
+        "id": "e8f4f3e2c9a94c78",
+        "type": "change",
+        "z": "78f04c1128a4100f",
+        "g": "196081f0352f3af0",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "Successfully!",
+                "tot": "str"
+            },
+            {
+                "t": "set",
+                "p": "timeout",
+                "pt": "msg",
+                "to": "7",
+                "tot": "num"
+            },
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "Data saved to C:/Users/edutic.id/.node-red/datalog/",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 700,
+        "y": 980,
+        "wires": [
+            [
+                "807cb2c79a23c984"
+            ]
+        ]
+    },
+    {
+        "id": "9a29e3cf35948a33",
+        "type": "ui_spacer",
+        "z": "78f04c1128a4100f",
+        "name": "spacer",
+        "group": "7e4ca4b84762c487",
+        "order": 6,
+        "width": 9,
+        "height": 1
     },
     {
         "id": "7e4ca4b84762c487",
@@ -1146,14 +954,14 @@
         "tab": "23ce40b25f59cdd3",
         "order": 1,
         "disp": true,
-        "width": 12,
+        "width": "12",
         "collapse": false,
         "className": ""
     },
     {
         "id": "23ce40b25f59cdd3",
         "type": "ui_tab",
-        "name": "MQTT",
+        "name": "Temperature Monitoring",
         "icon": "dashboard",
         "disabled": false,
         "hidden": false
