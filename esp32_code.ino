@@ -88,12 +88,12 @@ void setup() {
 }
 
 void loop() {
-  if (millis() - prevMillis >= intervalPengiriman*1000) {
-    if (!mqtt.connected()) {
+  if (!mqtt.connected()) {
       reconnect();
     }
     mqtt.loop();
-
+  
+  if (millis() - prevMillis >= intervalPengiriman*1000) {
     temperature = dht.readTemperature();
     humidity = dht.readHumidity();
     
